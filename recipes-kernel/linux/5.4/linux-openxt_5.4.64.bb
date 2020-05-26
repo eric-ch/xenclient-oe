@@ -11,7 +11,6 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/patches:${THISDIR}/defconfigs:"
 SRC_URI += "${KERNELORG_MIRROR}/linux/kernel/v${PV_MAJOR}.x/linux-${PV}.tar.xz;name=kernel \
     file://0001-nvme-pci-disable-the-write-zeros-command-for-Intel-6.patch \
     file://bridge-carrier-follow-prio0.patch \
-    file://privcmd-mmapnocache-ioctl.patch \
     file://xenkbd-tablet-resolution.patch \
     file://acpi-video-delay-init.patch \
     file://skb-forward-copy-bridge-param.patch \
@@ -19,7 +18,6 @@ SRC_URI += "${KERNELORG_MIRROR}/linux/kernel/v${PV_MAJOR}.x/linux-${PV}.tar.xz;n
     file://extra-mt-input-devices.patch \
     file://tpm-log-didvid.patch \
     file://blktap2.patch \
-    file://export-for-xenfb2.patch \
     file://intel-amt-support.patch \
     file://disable-csum-xennet.patch \
     file://pci-pt-move-unaligned-resources.patch \
