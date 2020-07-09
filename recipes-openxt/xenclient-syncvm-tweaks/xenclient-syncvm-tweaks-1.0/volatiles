@@ -1,3 +1,0 @@
-d root root 0755 /var/volatile/etc/network none
-l root root 0644 /etc/network/interfaces /var/volatile/etc/network/interfaces
-f root root 0644 /etc/network/interfaces none
