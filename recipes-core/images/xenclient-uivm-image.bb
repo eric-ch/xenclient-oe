@@ -96,6 +96,7 @@ IMAGE_INSTALL += "\
     anthy \
     matchbox-keyboard \
     matchbox-keyboard-im \
+    kernel-module-openxtfb \
 "
 
 require xenclient-version.inc

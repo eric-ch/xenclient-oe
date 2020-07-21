@@ -43,6 +43,7 @@ SRC_URI += "${KERNELORG_MIRROR}/linux/kernel/v${PV_MAJOR}.x/linux-${PV}.tar.xz;n
     file://xsa-155-qsb-023-xen-netfront-do-not-use-data-already-exposed-to-back.patch \
     file://tpm_tis-work-around-status-register-bug-in-STMicroelectronics-TPM.patch \
     file://defconfig \
+    file://xenbus-param-wait-nonessentials.patch \
     "
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=bbea815ee2795b2f4230826c0c6b8814"
