@@ -1,0 +1,13 @@
+--- a/drivers/xen/xenbus/xenbus_probe_frontend.c
++++ b/drivers/xen/xenbus/xenbus_probe_frontend.c
+@@ -293,10 +293,6 @@ static void wait_for_devices(struct xenb
+ 	if (!ready_to_wait_for_devices || !xen_domain())
+ 		return;
+ 
+-	while (exists_non_essential_connecting_device(drv))
+-		if (wait_loop(start, 30, &seconds_waited))
+-			break;
+-
+ 	/* Skips PVKB and PVFB check.*/
+ 	while (exists_essential_connecting_device(drv))
+ 		if (wait_loop(start, 270, &seconds_waited))
