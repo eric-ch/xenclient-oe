@@ -109,6 +109,8 @@ RDEPENDS_${PN} = " \
     pesign \
     ipxe \
     udev-extraconf-dom0 \
+    vglass \
+    disman \
 "
 
 # OE upgrade - temporarly disabled:
