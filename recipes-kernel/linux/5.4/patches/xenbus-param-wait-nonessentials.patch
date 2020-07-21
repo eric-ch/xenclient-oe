@@ -1,0 +1,33 @@
+--- a/drivers/xen/xenbus/xenbus_probe_frontend.c
++++ b/drivers/xen/xenbus/xenbus_probe_frontend.c
+@@ -17,6 +17,7 @@
+ #include <linux/mutex.h>
+ #include <linux/io.h>
+ #include <linux/module.h>
++#include <linux/moduleparam.h>
+ 
+ #include <asm/page.h>
+ #include <asm/pgtable.h>
+@@ -31,6 +32,8 @@
+ #include "xenbus.h"
+ 
+ 
++static bool __read_mostly wait_nonessentials = true;
++module_param(wait_nonessentials, bool, 0400);
+ 
+ /* device/<type>/<id> => <type>-<id> */
+ static int frontend_bus_id(char bus_id[XEN_BUS_ID_SIZE], const char *nodename)
+@@ -294,9 +297,10 @@ static void wait_for_devices(struct xenb
+ 	if (!ready_to_wait_for_devices || !xen_domain())
+ 		return;
+ 
+-	while (exists_non_essential_connecting_device(drv))
+-		if (wait_loop(start, 30, &seconds_waited))
+-			break;
++	if (wait_nonessentials)
++		while (exists_non_essential_connecting_device(drv))
++			if (wait_loop(start, 30, &seconds_waited))
++				break;
+ 
+ 	/* Skips PVKB and PVFB check.*/
+ 	while (exists_essential_connecting_device(drv))
