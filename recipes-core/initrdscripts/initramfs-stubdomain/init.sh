@@ -44,6 +44,7 @@ KERNEL_CMDLINE=`cat /proc/cmdline`
 for arg in $KERNEL_CMDLINE; do
     case "$arg" in
         debug) LOGLVL="debug";;
+        gdb) GDB="on";;
         *) continue ;;
     esac
 done
@@ -51,9 +52,16 @@ done
 modprobe xen-argo
 modprobe ivc
 
+echo "Xen chardevs:"
+echo /dev/xen/*
+
 if [ "${LOGLVL}" = "debug" ]; then
     cut -f1,2,3,4,5 -d ' ' /proc/modules
 fi
+
+test -c "/dev/argo_dgram" || echo "/dev/argo_dgram is missing."
+test -c "/dev/argo_stream" || echo "/dev/argo_stream is missing."
+test -c "/dev/ivc" || echo "/dev/ivc is missing."
 
 echo "0" > /sys/bus/pci/drivers_autoprobe
 for pci_dev in `ls /sys/bus/pci/devices/`
@@ -80,5 +88,17 @@ vm_uuid="$( xenstore-read /local/domain/${target}/vm )"
 dmargs="$( xenstore-read ${vm_uuid}/image/dmargs )"
 echo "target $target vm_uuid $vm_uuid"
 echo "Invoking qemu with dmargs       = ${dmargs}"
-/usr/bin/qemu-system-i386 ${dmargs}
+
+if [ "${GDB}" = "on" ]; then
+  cat - >> /tmp/cmds <<EOF
+  add-auto-load-safe-path /lib/libthread_db-1.0.so
+  run
+  backtrace
+EOF
+  gdb -x /tmp/cmds --args /usr/bin/qemu-system-i386 ${dmargs}
+else
+  /usr/bin/qemu-system-i386 ${dmargs}
+  echo "qemu-system-i386 terminated with code $?."
+fi
+
 poweroff -f
