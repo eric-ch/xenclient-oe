@@ -21,6 +21,7 @@ IMAGE_INSTALL = " \
     xen-tools-xenstore \
     qemu-dm-stubdom \
     argo-module \
+    gdb \
 "
 IMAGE_LINGUAS = ""
 
