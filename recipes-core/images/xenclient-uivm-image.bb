@@ -114,3 +114,5 @@ post_rootfs_shell_commands() {
     echo '1.0.0.0 dom0' >> ${IMAGE_ROOTFS}/etc/hosts
 }
 ROOTFS_POSTPROCESS_COMMAND += "post_rootfs_shell_commands; "
+
+IMAGE_ROOTFS_EXTRA_SPACE = "10485760"
