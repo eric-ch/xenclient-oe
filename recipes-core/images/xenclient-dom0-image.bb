@@ -12,6 +12,8 @@ inherit openxt-vm-common
 INITRD_VM = "xenclient-initramfs-image"
 INSTALL_VM_INITRD = "1"
 
+IMAGE_LINGUAS = "en-us"
+
 IMAGE_FEATURES += " \
     package-management \
     read-only-rootfs \

@@ -15,6 +15,8 @@ IMAGE_FEATURES += " \
     root-bash-shell \
 "
 
+IMAGE_LINGUAS = "en-us"
+
 IMAGE_FSTYPES = "ext3.disk.vhd.gz"
 export IMAGE_BASENAME = "xenclient-ndvm-image"
 

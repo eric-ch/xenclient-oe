@@ -22,6 +22,8 @@ PACKAGE_INSTALL = "xenclient-installer-part2"
 
 IMAGE_INSTALL = ""
 
+IMAGE_LINGUAS = "en-us"
+
 inherit image
 inherit xenclient-licences
 
