@@ -1,0 +1,12 @@
+# SPDX-License-Identifier: MIT
+define KFEATURE_DESCRIPTION "Apply OpenXT PV video quirks."
+define KFEATURE_COMPATIBILITY all
+
+# Use maximum absolute width/height dimension for xenkbd to support tablet.
+## TODO: determine if this is necessary.
+patch xenkbd-tablet-resolution.patch
+
+# Export private Linux interfaces for xenfb2 to be built out of tree.
+patch export-for-xenfb2.patch
+
+kconf hardware openxt-pv-video-quirks.cfg
