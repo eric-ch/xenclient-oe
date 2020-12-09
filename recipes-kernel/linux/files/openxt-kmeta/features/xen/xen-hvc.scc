@@ -1,0 +1,5 @@
+define KFEATURE_DESCRIPTION "Enable Xen Hypervisor Console support."
+define KFEATURE_COMPATIBILITY arch
+
+kconf non-hardware xen-blk-fe.cfg
+
