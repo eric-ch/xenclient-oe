@@ -1,0 +1,22 @@
+# SPDX-License-Identifier: MIT
+define KFEATURE_DESCRIPTION "Apply OpenXT video quirks."
+define KFEATURE_COMPATIBILITY board
+
+# privcmd ioctl to change the cache policy on mapped foreign memory region.
+patch privcmd-mmapnocache-ioctl.patch
+
+# Cmdline option to force acpi_video_register() to run early, even when it presumably should not.
+## TODO: determine if this is necessary.
+#patch acpi-video-delay-init.patch
+
+# Give additional flags to /dev/mem mmap'ed memory (surfman?)
+## TODO: determine if this is necessary.
+patch realmem-mmap.patch
+
+# Use the first fb driver loaded instead of the primary device while using DRM KMS helper.
+patch fbcon-do-not-drag-detect-primary-option.patch
+
+# Implement DRM i915_gem_foreign objects to allow graphic backends to configure i915 to scan guest memory directly.
+## Note: uses set_phys_to_machine, so requires DRM_I915=y
+patch gem-foreign.patch
+kconf hardware gem-foreign.cfg
