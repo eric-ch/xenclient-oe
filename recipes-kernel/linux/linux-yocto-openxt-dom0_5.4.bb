@@ -50,6 +50,7 @@ KERNEL_FEATURES += " \
     cfg/initrd-gz.scc \
     \
     patches/backports/backports.scc \
+    patches/openxt-exports/openxt-exports.scc \
     patches/blktap2/blktap2.scc \
     patches/openxt-input-quirks/openxt-input-quirks.scc \
     patches/openxt-pci-quirks/openxt-pci-quirks.scc \
