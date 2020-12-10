@@ -1,0 +1,45 @@
+################################################################################
+SHORT DESCRIPTION: 
+################################################################################
+Export private kernel symbols to out-of-tree modules depending on them.
+
+################################################################################
+REMOVAL 
+################################################################################
+When OpenXT no longer rely on driver using symbols that are not exported
+(Xenfb2, ...).
+
+################################################################################
+UPSTREAM PLAN
+################################################################################
+None.
+
+################################################################################
+INTERNAL DEPENDENCIES 
+################################################################################
+Xenfb2.
+
+################################################################################
+PATCHES 
+################################################################################
+--- a/arch/x86/xen/p2m.c
++++ b/arch/x86/xen/p2m.c
+@@ -803,6 +803,7 @@ static int p2m_dump_open(struct inode *i
+ {
+ 	return single_open(filp, p2m_dump_show, NULL);
+ }
++EXPORT_SYMBOL_GPL(set_phys_to_machine);
+ 
+ static const struct file_operations p2m_dump_fops = {
+ 	.open		= p2m_dump_open,
+--- a/mm/memory.c
++++ b/mm/memory.c
+@@ -1630,6 +1630,7 @@ out_unlock:
+ 	pte_unmap_unlock(pte, ptl);
+ 	return VM_FAULT_NOPAGE;
+ }
++EXPORT_SYMBOL_GPL(zap_page_range);
+ 
+ /**
+  * vmf_insert_pfn_prot - insert single pfn into user vma with specified pgprot
+
