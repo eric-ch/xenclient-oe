@@ -33,9 +33,11 @@ exec 0< /dev/hvc0
 exec 1> /dev/hvc0
 exec 2> /dev/hvc0
 
-## the modprobe of busybox-static is broken
-## so we have to use insmod directly
-insmod /lib/modules/`uname -r`/extra/xen-argo.ko
+modprobe xen-argo
+modprobe xen-gntalloc
+modprobe xen-gntdev
+modprobe xen-netfront
+modprobe xen-pcifront
 
 sync
 mkdir -p /proc /sys /mnt /tmp
