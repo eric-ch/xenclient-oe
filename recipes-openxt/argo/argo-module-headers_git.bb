@@ -14,6 +14,8 @@ do_install() {
     oe_runmake INSTALL_HDR_PATH=${D}${prefix} headers_install
 }
 
+# No compilation done, no need to clean or inherit module.bbclass.
+CLEANBROKEN = "1"
 # Skip build steps.
 do_compile[noexec] = "1"
 do_configure[noexec] = "1"
