@@ -67,7 +67,7 @@ PATCHES
  /**
   * pci_specified_resource_alignment - get resource alignment specified by user.
   * @dev: the PCI device to get
-@@ -6155,6 +6176,8 @@ static resource_size_t pci_specified_res
+@@ -6157,6 +6178,8 @@ static resource_size_t pci_specified_res
  		}
  		p++;
  	}
