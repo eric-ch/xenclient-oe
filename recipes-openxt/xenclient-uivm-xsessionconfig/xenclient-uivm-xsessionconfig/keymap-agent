@@ -7,7 +7,8 @@ fi
 # Usage: set_keymap
 #   Read the keyboard layout from xenstore and run setxkbmap.
 set_keymap() {
-    local layout=$(xenstore-read /xenclient/keyboard/layout)
+    local layout=$(xenstore-read /xenclient/keyboard/layout 2>/dev/null)
+    layout="${layout:-us}"
 
     setxkbmap "${layout}"
 }

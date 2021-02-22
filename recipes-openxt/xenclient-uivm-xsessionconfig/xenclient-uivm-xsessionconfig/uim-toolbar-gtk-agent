@@ -41,7 +41,7 @@ start_uim_toolbar() {
     fi
 
     login_state="$(xenstore-read login/state 2>/dev/null)"
-    layout="$(xenstore-read /xenclient/keyboard/layout)"
+    layout="$(xenstore-read /xenclient/keyboard/layout 2>/dev/null)"
     locale="$(xenmgr_get_locale)"
     case "${login_state}" in
         "0"|"3"|"")
