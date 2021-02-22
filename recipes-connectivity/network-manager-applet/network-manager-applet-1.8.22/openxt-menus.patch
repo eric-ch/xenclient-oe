@@ -214,7 +214,7 @@
  		nma_context_menu_update (applet);
  	} else
  		nma_menu_show_cb (GTK_WIDGET (menu), applet);
-@@ -2989,6 +2973,54 @@ applet_agent_cancel_secrets_cb (AppletAg
+@@ -2989,6 +2973,53 @@ applet_agent_cancel_secrets_cb (AppletAg
  	}
  }
  
@@ -252,7 +252,6 @@
 +	g_signal_connect (applet->menu, "show", G_CALLBACK (nma_menu_show_cb), applet);
 +	g_signal_connect (applet->menu, "deactivate", G_CALLBACK (nma_menu_deactivate_cb), applet);
 +
-+	g_warning ("popup_network_menu");
 +	/* Display the new menu */
 +	gtk_menu_popup (GTK_MENU (applet->menu), NULL, NULL,
 +			(GtkMenuPositionFunc)set_popup_position, (gpointer)&menuPosition,
@@ -420,7 +419,7 @@
  
  	oclass->finalize = finalize;
 +
-+	g_warning("register openxt signals");
++	g_info("register openxt signals");
 +	/* Signals */
 +	signals[POPUP_NETWORK_MENU] =
 +		g_signal_new (APPLET_POPUP_NETWORK_MENU,
