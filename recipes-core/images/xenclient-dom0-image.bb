@@ -49,6 +49,8 @@ IMAGE_INSTALL += "\
     ${@bb.utils.contains('IMAGE_FEATURES', 'debug-tweaks', 'packagegroup-selinux-policycoreutils audit', '' ,d)} \
 "
 
+IMAGE_ROOTFS_EXTRA_SPACE = "4194304"
+
 inherit xenclient-licences
 
 require xenclient-version.inc

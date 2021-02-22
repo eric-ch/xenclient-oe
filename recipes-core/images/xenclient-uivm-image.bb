@@ -99,6 +99,8 @@ IMAGE_INSTALL += "\
     kernel-module-openxtfb \
 "
 
+IMAGE_ROOTFS_EXTRA_SPACE = "4194304"
+
 require xenclient-version.inc
 inherit xenclient-licences
 
