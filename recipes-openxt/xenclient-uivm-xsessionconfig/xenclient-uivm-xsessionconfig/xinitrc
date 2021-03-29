@@ -150,7 +150,7 @@ if test x"$DISABLE_NM" = x"true" ; then
 else
   keymap-agent &
   nm-applets-agent &
-  uim-toolbar-gtk-agent &
+  #uim-toolbar-gtk-agent &
 fi
 
 # Wait until something dies and terminate other subprocess.
