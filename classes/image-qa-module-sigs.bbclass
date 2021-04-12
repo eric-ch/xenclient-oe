@@ -88,7 +88,11 @@ check_module() {
 	return "$ret"
 }
 
-do_image_qa[depends] += "perl-native:do_populate_sysroot openssl-native:do_populate_sysroot"
+do_image_qa[depends] += " \
+	perl-native:do_populate_sysroot \
+	openssl-native:do_populate_sysroot \
+	virtual/kernel:do_shared_workdir \
+"
 
 IMAGE_QA_COMMANDS += " \
 	do_image_qa_module_sigs \
