@@ -17,6 +17,10 @@ export KERNEL_MODULE_SIG_KEY
 # build-time keypair will be generated and used for signing and embedding.
 export KERNEL_MODULE_SIG_CERT
 
+def get_signing_key(d):
+    path = d.getVar("KERNEL_MODULE_SIG_CERT") or os.path.join(d.getVar("STAGING_KERNEL_BUILDDIR"),"certs","signing_key.x509")
+    return path + ":" + str(os.path.exists(path))
+
 # Kernel builds will override this with ${B}/scripts/sign-file
 SIGN_FILE = "${STAGING_KERNEL_BUILDDIR}/scripts/sign-file"
 
@@ -44,3 +48,6 @@ addtask sign_modules after do_install before do_package
 do_install[lockfiles] = "${TMPDIR}/kernel-scripts.lock"
 # Explicit keys sign modules in do_sign_modules
 do_sign_modules[lockfiles] = "${TMPDIR}/kernel-scripts.lock"
+
+do_sign_modules[depends] += "virtual/kernel:do_shared_workdir"
+do_sign_modules[file-checksums] += "${@get_signing_key(d)}"
