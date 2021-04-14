@@ -18,4 +18,7 @@ do_configure_append() {
     fi
 }
 
-do_configure[file-checksums] += "${@get_signing_key(d)}"
+do_compile[file-checksums] += "${@get_signing_cert(d)}"
+do_shared_workdir[file-checksums] += "${@get_autogen_signing_cert(d)}"
+# Likely redundant...
+do_install[file-checksums] += "${@get_signing_cert(d)}"

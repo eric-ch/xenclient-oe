@@ -17,9 +17,29 @@ export KERNEL_MODULE_SIG_KEY
 # build-time keypair will be generated and used for signing and embedding.
 export KERNEL_MODULE_SIG_CERT
 
-def get_signing_key(d):
-    path = d.getVar("KERNEL_MODULE_SIG_CERT") or os.path.join(d.getVar("STAGING_KERNEL_BUILDDIR"),"certs","signing_key.x509")
+def get_autogen_signing_cert(d):
+    if d.getVar("KERNEL_MODULE_SIG_CERT"):
+        return ""
+    path = os.path.join(d.getVar("B"),"certs","signing_key.x509")
     return path + ":" + str(os.path.exists(path))
+
+def get_signing_cert(d):
+    path = d.getVar("KERNEL_MODULE_SIG_CERT")
+    if path:
+        return path + ":" + str(os.path.exists(path))
+    return ""
+
+def get_autogen_signing_key(d):
+    if d.getVar("KERNEL_MODULE_SIG_KEY"):
+        return ""
+    path = os.path.join(d.getVar("B"),"certs","signing_key.pem")
+    return path + ":" + str(os.path.exists(path))
+
+def get_signing_key(d):
+    path = d.getVar("KERNEL_MODULE_SIG_KEY")
+    if path:
+        return path + ":" + str(os.path.exists(path))
+    return ""
 
 # Kernel builds will override this with ${B}/scripts/sign-file
 SIGN_FILE = "${STAGING_KERNEL_BUILDDIR}/scripts/sign-file"
@@ -46,6 +66,7 @@ addtask sign_modules after do_install before do_package
 # Otherwise sign-file could disappear from ${STAGING_KERNEL_BUILDDIR}
 # Build-time auto-generated keys sign modules in do_install
 do_install[lockfiles] = "${TMPDIR}/kernel-scripts.lock"
+do_install[file-checksums] += "${@get_autogen_signing_key(d)}"
 # Explicit keys sign modules in do_sign_modules
 do_sign_modules[lockfiles] = "${TMPDIR}/kernel-scripts.lock"
 
