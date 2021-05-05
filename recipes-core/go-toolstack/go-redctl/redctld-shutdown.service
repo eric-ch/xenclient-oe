@@ -1,0 +1,14 @@
+[Unit]
+Description=redctld domain shutdown manager
+Requires=xen-qemu-dom0-disk-backend.service
+After=redctld.service xen-qemu-dom0-disk-backend.service
+After=gdm.service
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStop=/usr/bin/redctl shutdown --timeout 60
+TimeoutStopSec=90
+
+[Install]
+WantedBy=multi-user.target

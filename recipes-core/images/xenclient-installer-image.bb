@@ -15,6 +15,8 @@ PR = "r16"
 IMAGE_FSTYPES = "cpio.gz"
 export IMAGE_BASENAME = "xenclient-installer-image"
 
+IMAGE_LINGUAS = "en-us"
+
 COMPATIBLE_MACHINE = "(openxt-installer)"
 
 BAD_RECOMMENDATIONS += " \

@@ -1,0 +1,10 @@
+[Unit]
+Description=Redfield Toolstack Daemon (redctld)
+After=xen-init-dom0.service
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/redctld
+
+[Install]
+WantedBy=multi-user.target

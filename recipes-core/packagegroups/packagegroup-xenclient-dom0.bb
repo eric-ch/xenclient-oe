@@ -112,6 +112,7 @@ RDEPENDS_${PN} = " \
     pesign \
     ipxe \
     udev-extraconf-dom0 \
+    go-redctl \
 "
 
 # OE upgrade - temporarly disabled:
