@@ -7,6 +7,7 @@ KERNEL_FEATURES += " \
     features/xen/xen-blk-fe.scc \
     features/xen/xen-net-fe.scc \
     features/xen/xen-vkbd-fe.scc \
+    features/xen/xen-vfb-fe.scc \
     \
     cfg/openxt-common.scc \
     \

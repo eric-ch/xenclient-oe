@@ -39,6 +39,9 @@ KERNEL_FEATURES += " \
     \
     bsp/common-pc/common-pc-hid.scc \
     \
+    bsp/gpu/nouveau.scc \
+    bsp/gpu/radeon.scc \
+    \
     features/usb/touchscreen-composite.scc \
     features/usb/ehci-hcd.scc \
     features/usb/uhci-hcd.scc \
