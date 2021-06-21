@@ -31,6 +31,7 @@ BAD_RECOMMENDATIONS += " \
     avahi-daemon \
     avahi-autoipd \
     ${@bb.utils.contains('IMAGE_FEATURES', 'web-certificates', '', 'ca-certificates', d)} \
+    libivc \
 "
 
 IMAGE_INSTALL += "\
@@ -62,6 +63,7 @@ post_rootfs_shell_commands() {
 
     rm ${IMAGE_ROOTFS}/etc/hosts
     ln -s /var/run/hosts ${IMAGE_ROOTFS}/etc/hosts
+    ln -s /var/volatile/etc/resolv.conf ${IMAGE_ROOTFS}/etc/resolv.conf
 
     echo 'kernel.printk_ratelimit = 0' >> ${IMAGE_ROOTFS}/etc/sysctl.conf
 
