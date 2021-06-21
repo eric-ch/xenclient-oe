@@ -2,6 +2,5 @@
 define KFEATURE_DESCRIPTION "Apply backported patches"
 define KFEATURE_COMPATIBILITY all
 
-#5.4.75 has it
-#patch 0001-nvme-pci-disable-the-write-zeros-command-for-Intel-6.patch
 patch tpm_tis-work-around-status-register-bug-in-STMicroelectronics-TPM.patch
+patch 0001-xen-gntdev-switch-from-kcalloc-to-kvcalloc.patch
