@@ -11,7 +11,6 @@ KERNEL_FEATURES += " \
     cfg/openxt-common.scc \
     \
     patches/backports/backports.scc \
-    patches/openxt-exports/openxt-exports.scc \
     patches/openxt-pv-video-quirks/openxt-pv-video-quirks.scc \
     patches/openxt-service-vms/openxt-service-vms.scc \
     patches/xsa-155/xsa-155.scc \
