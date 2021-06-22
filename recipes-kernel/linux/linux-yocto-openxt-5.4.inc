@@ -16,6 +16,8 @@ SRCREV_meta = "6144556fdee152870d8e792d41948ddcf9a684f1"
 LIC_FILES_CHKSUM = "file://COPYING;md5=bbea815ee2795b2f4230826c0c6b8814"
 LINUX_VERSION ?= "5.4.106"
 
+inherit kernel-module-signing
+
 DEPENDS += " \
     ${@bb.utils.contains('ARCH', 'x86', 'elfutils-native', '', d)} \
     openssl-native \
