@@ -17,43 +17,40 @@
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 #
 
-#
-# Starts vusb daemon.
-#
+DESC="VUSBd"
+EXEC="/usr/bin/vusb-daemon"
+PIDFILE="/var/run/vusb.pid"
+OPTS=""
 
-PROG=/usr/sbin/vusb-daemon
-
-# Make sure the progam exists
-[ -f "$PROG" ] || exit 0
-
-start() {
-	"$PROG" 2>&1 | logger -t 'vusb-daemon' &
-	echo "OK"
-}
-stop() {
-	echo -n "Stopping vusb_daemon: "
-	pkill vusb-daemon
-	echo "OK"
+do_start() {
+    start-stop-daemon --start --quiet --oknodo --background \
+        --make-pidfile --pidfile "$PIDFILE" \
+        --exec "$EXEC" -- $OPTS
 }
 
-restart() {
-	stop
-	start
+do_stop() {
+    start-stop-daemon --stop --pidfile "$PIDFILE" --oknodo
+    rm -f "$PIDFILE"
 }
 
 case "$1" in
-  start)
-  	start
-	;;
-  stop)
-  	stop
-	;;
-  restart|reload)
-  	restart
-	;;
-  *)
-	echo $"Usage: $0 {start|stop|restart}"
-	exit 1
+    start)
+        echo -n "Starting $DESC... "
+        do_start
+        echo "OK"
+        ;;
+    stop)
+        echo -n "Stopping $DESC... "
+        do_stop
+        echo "OK"
+        ;;
+    restart)
+        echo -n "Restarting $DESC... "
+        do_stop
+        do_start
+        echo "OK"
+        ;;
+    *)
+        echo "Usage: $0 {start|stop|restart}"
+        exit 1
 esac
-
-exit $?
